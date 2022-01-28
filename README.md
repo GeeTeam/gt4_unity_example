@@ -10,13 +10,13 @@
 │   ├── Plugins
 │   │   ├── Android
 │   │   │   ├── AndroidManifest.xml // Android 清单文件
-│   │   │   ├── geetest_captcha_android_v*.aar // Android SDK 文件
+│   │   │   ├── geetest_captcha_android_v*.aar // Android SDK 文件（登录后台获取最新版本的 SDK）
 │   │   │   ├── gt4-captcha-plugin-release.aar // Unity 调用 aar 插件
 │   │   │   ├── kotlin-stdlib-*.jar // Android SDK 依赖 kotlin 文件
 │   │   │   └── GT4AndroidUnityHandler.cs // Unity Android 调调用 script
 │   │   └── iOS
-│   │       ├── GTCaptcha4.bundle // 极验 iOS SDK bundle 文件
-│   │       ├── GTCaptcha4.framework // 极验 iOS SDK 文件
+│   │       ├── GTCaptcha4.bundle // 极验 iOS SDK bundle 文件（登录后台获取最新版本的 SDK）
+│   │       ├── GTCaptcha4.framework // 极验 iOS SDK 文件（登录后台获取最新版本的 SDK）
 │   │       ├── GTCaptcha4UnityBridge.h // 桥文件 .h
 │   │       ├── GTCaptcha4UnityBridge.m // 桥文件 .m
 │   │       └── GT4iOSUnityHandler.cs // Unity iOS 调用 script
@@ -39,7 +39,7 @@
 
 ### 集成说明
 
-1. 集成极验 iOS SDK 需要把 `Assets/Plugins/iOS/` 下的 SDK 相关的文件 `GTCaptcha4.framework`、`GTCaptcha4.bundle`，SDK 调用相关的桥文件 `GTCaptcha4UnityBridge.h`、`GTCaptcha4UnityBridge.m` ，C# 调用文件 `GT4iOSUnityHandler.cs` 导入到工程中的 **Assets** 目录下。
+1. 集成极验 iOS SDK 需要把 SDK 相关的文件 `GTCaptcha4.framework`、`GTCaptcha4.bundle` （登录产品后台获取）导入到工程的 `Assets/Plugins/iOS/` 路径下，此外 SDK 调用相关的桥文件 `GTCaptcha4UnityBridge.h`、`GTCaptcha4UnityBridge.m` ，C# 调用文件 `GT4iOSUnityHandler.cs` 导入到工程中的 **Assets** 目录下。
 2. 参考 `GT4iOSUnityHandler.cs` 和 `SampleScene.unity` 关联 Unity 组件对象的事件，调用验证码模块。
 3. 打开 `File - Build Settings`，并在平台中选择 iOS，场景中勾选 iOS 相应的场景。
 4. 选择左下角的 `Player Settings - Other Settings`，确认 Xcode 工程相关的信息。真机使用 Device SDK，模拟器使用 Simulator SDK。
@@ -58,7 +58,7 @@
 
 ### 集成说明
 
-1. 集成极验 Android SDK 需要把 `Assets/Plugins/Android/` 下的 SDK 相关的文件 `geetest_captcha_android_v*.aar`（需要通过管理后台获取，参考官方文档），`kotlin-stdlib-*.aar` , SDK 调用相关的桥文件 `gt4-captcha-plugin-release.aar`，C# 调用文件 `GT4AndroidUnityHandler.cs` 导入到工程中的 **Assets** 目录下。
+1. 集成极验 Android SDK 需要把 SDK 相关的文件 `geetest_captcha_android_v*.aar` （登录产品后台获取） 导入到工程的 `Assets/Plugins/Android/` 路径下，此外 `kotlin-stdlib-*.aar` 、SDK 调用相关的桥文件 `gt4-captcha-plugin-release.aar`、C# 调用文件 `GT4AndroidUnityHandler.cs` 均需要导入到工程中的 **Assets** 目录下。
 2. 参考 `GT4AndroidUnityHandler.cs` 和 `SampleScene.unity` 关联 Unity 组件对象的事件，调用验证码模块。
 3. 打开 `File - Build Settings`，并在平台中选择 Android，场景中勾选 Android 相应的场景。
 4. 选择左下角的 `Player Settings - Other Settings`，确认 Android 工程相关的信息。
