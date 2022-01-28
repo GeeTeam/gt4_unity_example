@@ -1,6 +1,6 @@
 # gt4-unity-example
 
-## 工程目录说明
+## 工程目录说明 (Table Of Project Content )
 
 ```
 .
@@ -35,7 +35,13 @@
 └── obj
 ```
 
-## iOS 使用指南
+## 如何运行 (Run)
+
+从登录产品后台，获取最新的 iOS、Android SDK 按照上面的工程目录说明导入 SDK，即可运行。
+
+> **示例工程使用 Unity 2020 开发**
+
+## iOS 使用指南 (iOS Platform)
 
 ### 集成说明
 
@@ -54,7 +60,7 @@
 * 桥文件 `GTCaptcha4UnityBridge.m`、C# 调用文件 `GT4iOSUnityHandler.cs` ，以更进一步了解极验 iOS SDK 的 Unity 封装。
 * [极验 iOS 官方文档](https://docs.geetest.com/gt4/deploy/client/ios) 和官方 Xcode Project 示例，以了解极验 iOS SDK 的原生使用方式。
 
-## Android 使用指南
+## Android 使用指南 (Android Platform)
 
 ### 集成说明
 
