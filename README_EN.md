@@ -78,3 +78,88 @@ If you need to implement Android SDK in custom way，below information will be u
 1. Create a new Android studio project and create a module. [GeeTest Android  official developer docs](https://docs.geetest.com/BehaviorVerification/deploy/client/android) 
 2. Refer to  `MainActivity.java` for necessary verification method and implementation steps. 
 3. After fulfill the custom requirements, package the module as a new  `gt4-captcha-plugin-release.aar` file. 
+
+`MainActivity.java` Example：
+
+```java
+public class MainActivity extends UnityPlayerActivity {
+
+    // CaptchaId
+    private String captchaId;
+    private int webViewTimeout = 10000;
+    private String language = null;
+    private GTCaptcha4Client gtCaptcha4Client;
+
+    public void initWithCaptchaId(String captchaId) {
+        this.captchaId = captchaId;
+        gtCaptcha4Client = GTCaptcha4Client.getClient(this);
+    }
+
+    public void setWebViewTimeout(int webViewTimeout) {
+        this.webViewTimeout = webViewTimeout;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void startGT4Captcha(final PluginCallback callback) {
+        UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                verify(callback);
+            }
+        });
+    }
+
+    public void verify(final PluginCallback callback) {
+        GTCaptcha4Config gtCaptcha4Config = new GTCaptcha4Config.Builder()
+                .setTimeOut(webViewTimeout)
+                .setLanguage(language)
+                .build();
+        gtCaptcha4Client.init(captchaId, gtCaptcha4Config)
+                .addOnSuccessListener(new GTCaptcha4Client.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(boolean status, String response) {
+                        if (callback != null) {
+                            callback.gt4SuccessHandler(status, response);
+                        }
+                    }
+                })
+                .addOnFailureListener(new GTCaptcha4Client.OnFailureListener() {
+                    @Override
+                    public void onFailure(String error) {
+                        if (callback != null) {
+                            callback.gt4ErrorHandler(error);
+                        }
+                    }
+                })
+                .verifyWithCaptcha();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // TODO You have to add it.
+        if (gtCaptcha4Client != null) {
+            gtCaptcha4Client.destroy();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (gtCaptcha4Client != null) {
+            gtCaptcha4Client.configurationChanged(newConfig);
+        }
+    }
+
+}
+
+
+public interface PluginCallback {
+    void gt4ErrorHandler(String error);
+
+    void gt4SuccessHandler(boolean status, String response);
+}
+```
+
